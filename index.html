@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CV</title>
+<style>
+  @font-face { font-family: "InterCV"; font-weight: 400; src: url("fonts/inter-400.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2013-2014, U+2190-2193, U+00B7; }
+  @font-face { font-family: "InterCV"; font-weight: 400; src: url("fonts/inter-ext-400.woff2") format("woff2"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+  @font-face { font-family: "InterCV"; font-weight: 500; src: url("fonts/inter-500.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2013-2014, U+2190-2193, U+00B7; }
+  @font-face { font-family: "InterCV"; font-weight: 500; src: url("fonts/inter-ext-500.woff2") format("woff2"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+  @font-face { font-family: "InterCV"; font-weight: 700; src: url("fonts/inter-700.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2013-2014, U+2190-2193, U+00B7; }
+  @font-face { font-family: "InterCV"; font-weight: 700; src: url("fonts/inter-ext-700.woff2") format("woff2"); unicode-range: U+0100-024F, U+1E00-1EFF; }
+  /* Layout only; colors come from themes/<theme>.css, picked by the profile. */
+  :root { --side: 72mm; }
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #e9e9e9; }
+  body { font-kerning: none; font-feature-settings: "kern" 0, "liga" 0, "calt" 0; text-rendering: optimizeSpeed; font-family: InterCV, "Helvetica Neue", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .page { position: relative; width: 210mm; height: 297mm; margin: 10mm auto; background: #fff; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.15); }
+
+  /* Decorative shapes */
+  .side-bg { position: absolute; left: 0; top: 30mm; width: var(--side); bottom: 26mm; background: var(--side-bg); border-radius: 0 0 22mm 0; }
+  .header-bg { position: absolute; left: 0; top: 0; right: 0; height: 47mm; background: var(--header-bg); border-radius: 0 0 26mm 0; }
+  .header-wave { position: absolute; left: 0; top: 40mm; width: 72mm; height: 16mm; background: var(--header-bg); border-radius: 0 0 50% 0; }
+  .bottom-band { position: absolute; left: var(--side); right: 0; bottom: 0; height: 9mm; background: var(--side-bg); }
+
+  .photo { position: absolute; left: 9mm; top: 6mm; width: 50mm; height: 50mm; border-radius: 50%; overflow: hidden; border: 2.2mm solid var(--photo-ring); background: var(--photo-ring); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; transform: scale(1.16); }
+  .photo.initials { background: var(--initials-bg); }
+  .photo canvas { display: block; width: 100%; height: 100%; }
+
+  .head { position: absolute; left: 78mm; top: 8mm; right: 10mm; color: var(--header-ink); }
+  .head h1 { font-size: 27pt; font-weight: 500; letter-spacing: .5pt; line-height: 1.1; }
+  .head h2 { font-size: 21pt; font-weight: 500; line-height: 1.2; margin-top: 1mm; }
+  .head .tagline { font-size: 10.5pt; font-weight: 500; margin-top: 2mm; }
+
+  .links { position: absolute; left: 78mm; top: 49mm; font-size: 9pt; font-weight: 500; line-height: 1.5; }
+  .links a { color: var(--link); text-decoration: none; }
+
+  .pill { display: inline-block; border-radius: 999px; padding: 1mm 6mm; font-size: 11pt; font-weight: 500; letter-spacing: .4pt; }
+  .pill { background: var(--pill-bg); color: var(--pill-ink); }
+  .pill.accent { background: var(--accent-bg); color: var(--accent-ink); }
+
+  /* Columns: grid places the blocks, DOM order is the text order (profile, experience, skills) */
+  .cols { position: absolute; left: 6mm; right: 8mm; top: 62mm; bottom: 12mm; display: grid; grid-template-columns: calc(var(--side) - 11mm) 1fr; grid-template-rows: auto minmax(0, 1fr); column-gap: 9mm; }
+
+  /* Left column */
+  .side { grid-column: 1; grid-row: 1; min-height: 0; color: var(--side-ink); }
+  .side-skills { grid-row: 2; margin-bottom: 18mm; }
+  .side .pill { display: block; text-align: center; margin: 0 4mm 3.5mm; }
+  .side .profile { font-size: 10pt; font-weight: 500; line-height: 1.45; margin-bottom: 6mm; }
+  .side .skills p { font-size: 9.6pt; font-weight: 500; line-height: 1.35; margin-bottom: 1.8mm; }
+  .side .skills b { font-weight: 700; }
+
+
+  /* Right column */
+  .main { grid-column: 2; grid-row: 1 / 3; min-height: 0; display: flex; flex-direction: column; }
+  .main .pill { align-self: flex-start; margin-bottom: 3mm; }
+  .job { margin-bottom: 3.4mm; font-size: 10pt; line-height: 1.42; }
+  .job .hd { font-weight: 700; }
+  .job ul { margin-left: 4mm; }
+  .job li { margin-bottom: .8mm; }
+  .edu { margin-top: 1mm; font-size: 10pt; line-height: 1.42; }
+  .edu p { margin-bottom: 1mm; }
+  .edu b { font-weight: 700; }
+
+  @media print { html, body { background: #fff; } .page { margin: 0; box-shadow: none; } }
+  .load-error { position: absolute; top: 80mm; left: 15mm; right: 15mm; background: #fff; color: #d00; border: .6mm solid #d00; font: 500 11pt/1.5 InterCV, sans-serif; padding: 5mm; z-index: 10; white-space: pre-line; }
+  .overflow-alert { position: absolute; top: 0; left: 0; right: 0; background: #d00; color: #fff; font: 700 12pt InterCV, sans-serif; padding: 2mm; text-align: center; z-index: 10; }
+</style>
+</head>
+<body>
+<div class="page" id="page">
+  <div class="side-bg"></div>
+  <div class="header-bg"></div>
+  <div class="header-wave"></div>
+  <div class="bottom-band"></div>
+  <div class="photo" id="photo"></div>
+  <div class="head"><h1 id="name"></h1><h2 id="headline"></h2><div class="tagline" id="tagline"></div></div>
+  <div class="links" id="links"></div>
+  <div class="cols">
+    <section class="side">
+      <span class="pill">PROFILE</span>
+      <p class="profile" id="profile"></p>
+    </section>
+    <main class="main" id="main">
+      <span class="pill accent">EXPERIENCE</span>
+      <div id="experience"></div>
+      <span class="pill">EDUCATION</span>
+      <div class="edu" id="education"></div>
+    </main>
+    <aside class="side side-skills">
+      <span class="pill">SKILLS</span>
+      <div class="skills" id="skills"></div>
+    </aside>
+  </div>
+</div>
+<script>
+  // index.html?profile=<id>&v=<variant> renders profiles/<id>/content.js with themes/<theme>.css.
+  const params = new URLSearchParams(location.search);
+  const id = params.get("profile") || "_template";
+  const dir = "profiles/" + id + "/";
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const DOT = " \u00b7 ";
+  // Same result as Python's str.title(), which atscheck.py uses for Author and Title (names starting with an eszett or a digraph differ).
+  const titleCase = (s) => s.toLowerCase().replace(/(^|[^\p{L}])(\p{L})/gu, (m, a, b) => a + b.toUpperCase());
+
+  const load = (tag, attrs) => new Promise((ok, ko) => {
+    const el = Object.assign(document.createElement(tag), attrs);
+    el.onload = ok;
+    el.onerror = ko;
+    document.head.appendChild(el);
+  });
+
+  const fail = (msg) => {
+    const e = document.createElement("div");
+    e.className = "load-error";
+    e.textContent = msg;
+    document.getElementById("page").appendChild(e);
+  };
+
+  async function main() {
+    const missing = `Profile "${id}" did not load: ${dir}content.js is missing or has an error.\n` +
+      "Open index.html?profile=<id>&v=<variant>, where profiles/<id>/content.js sets window.PROFILE.";
+    try { await load("script", { src: dir + "content.js" }); } catch (e) { return fail(missing); }
+    const p = window.PROFILE;
+    if (!p || !p.variants) return fail(missing);
+    const variant = params.get("v") || Object.keys(p.variants)[0];
+    const cv = p.variants[variant];
+    if (!cv) return fail(`Variant "${variant}" is not in profile "${id}" (has ${Object.keys(p.variants).join(", ")}).`);
+    try { await load("link", { rel: "stylesheet", href: "themes/" + p.theme + ".css" }); }
+    catch (e) { return fail(`Theme "${p.theme}" did not load: themes/${p.theme}.css is missing.`); }
+    try { render(p, cv); } catch (e) { fail(`Profile "${id}" has an error: ${e.message}`); }
+  }
+
+  function render(p, cv) {
+    const author = titleCase(cv.name);
+    document.documentElement.lang = p.lang || "en";
+    document.title = author + " - " + cv.headline + " CV";
+    renderPhoto(p.photo ? dir + p.photo : null, author);
+    document.getElementById("name").textContent = cv.name;
+    document.getElementById("headline").textContent = cv.headline;
+    document.getElementById("tagline").textContent = cv.tagline.join(DOT);
+    const mail = cv.contact.email ? `<a href="mailto:${cv.contact.email}">${esc(cv.contact.email)}</a>` : "";
+    const line1 = [mail, cv.contact.city ? esc(cv.contact.city) : ""].filter(Boolean).join(DOT);
+    const line2 = [cv.contact.linkedin, cv.contact.site].filter(Boolean)
+      .map((l) => `<a href="${l.url}">${esc(l.label)}</a>`).join(DOT);
+    document.getElementById("links").innerHTML = [line1, line2].filter(Boolean).map((l) => `<div>${l}</div>`).join("");
+    document.getElementById("profile").textContent = cv.profile;
+    document.getElementById("skills").innerHTML =
+      cv.skills.map(([k, v]) => `<p><b>${esc(k)}:</b> ${esc(v)}</p>`).join("");
+    document.getElementById("experience").innerHTML = cv.experience.map((j) => {
+      const hd = `<div class="hd">${esc(j.dates)}${DOT}${esc(j.title)}${DOT}${esc(j.org)}</div>`;
+      const body = j.items ? `<ul>${j.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : `<div>${esc(j.text)}</div>`;
+      return `<div class="job">${hd}${body}</div>`;
+    }).join("");
+    document.getElementById("education").innerHTML =
+      cv.education.map((e) => `<p><b>${esc(e.title)}</b>${DOT}${esc(e.org)}${DOT}${esc(e.dates)}</p>`).join("");
+    checkOverflow();
+  }
+
+  function renderPhoto(src, author) {
+    const box = document.getElementById("photo");
+    if (!src) return renderInitials(box, author);
+    const img = Object.assign(document.createElement("img"), { src, alt: author });
+    img.onerror = () => renderInitials(box, author);
+    box.appendChild(img);
+  }
+
+  // Initials drawn on a canvas, so they print as an image and stay out of the ATS text.
+  async function renderInitials(box, author) {
+    const words = author.split(/\s+/).filter(Boolean);
+    const text = (words[0][0] + (words.length > 1 ? words[words.length - 1][0] : "")).toUpperCase();
+    const font = "500 230px InterCV, sans-serif";
+    await document.fonts.load(font, text).catch(() => {});
+    box.replaceChildren();
+    box.classList.add("initials");
+    const canvas = Object.assign(document.createElement("canvas"), { width: 600, height: 600 });
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = getComputedStyle(box).getPropertyValue("--initials-ink").trim();
+    ctx.font = font;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, 300, 310);
+    canvas.setAttribute("aria-hidden", "true");
+    box.appendChild(canvas);
+  }
+
+  // Flag any block that runs past its area, so a too-long text is visible before sending.
+  function checkOverflow() {
+    const over = [];
+    const bottom = (el) => el.getBoundingClientRect().bottom;
+    if (bottom(document.querySelector(".head")) > bottom(document.querySelector(".header-bg")) + 0.5) over.push("name/headline/tagline");
+    const main = document.getElementById("main");
+    if (main.scrollHeight > main.clientHeight + 1) over.push("experience/education");
+    const side = document.querySelector(".side-skills");
+    if (side.scrollHeight > side.clientHeight + 1) over.push("profile/skills");
+    if (over.length) {
+      const a = document.createElement("div");
+      a.className = "overflow-alert";
+      a.textContent = "OVERFLOW: " + over.join(", ") + " - shorten the text";
+      document.getElementById("page").appendChild(a);
+    }
+  }
+
+  main();
+</script>
+</body>
+</html>

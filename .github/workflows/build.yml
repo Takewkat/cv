@@ -1,0 +1,71 @@
+# Builds every profile and the template on every push and PR; publishes the PDFs to the "latest" release from main.
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# One run at a time per branch, so two quick pushes to main cannot race on the latest release.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Tracker unit tests
+        run: python3 -m unittest discover -s tracker/tests -v
+
+      - name: Install poppler
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils
+
+      - name: Build PDFs
+        env:
+          CHROME: google-chrome
+        run: ./build.sh
+
+      - name: Check the template profile
+        env:
+          CHROME: google-chrome
+        run: ./build.sh _template
+
+      - name: Render page-1 previews
+        run: |
+          for pdf in out/*/*.pdf; do
+            pdftoppm -png -r 110 -singlefile "$pdf" "${pdf%.pdf}"
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdfs
+          path: out/
+
+      - name: Publish to the latest release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Release assets are flat: out/<id>/<file> becomes <id>-<file>; profiles starting with _ stay out
+          mkdir -p release
+          for f in out/*/*.pdf out/*/*.png; do
+            id="$(basename "$(dirname "$f")")"
+            case "$id" in _*) continue ;; esac
+            cp "$f" "release/$id-$(basename "$f")"
+          done
+          # Nothing to publish while only the _template example exists
+          if ! ls release/* >/dev/null 2>&1; then echo "no profile to publish"; exit 0; fi
+          git tag -f latest
+          git push -f origin refs/tags/latest
+          gh release view latest >/dev/null 2>&1 || gh release create latest --title "CV (latest build)" --notes "Built from main by CI."
+          gh release upload latest release/* --clobber
+          # Drop assets of a renamed or removed profile or variant
+          gh release view latest --json assets -q '.assets[].name' | while read -r name; do
+            [ -e "release/$name" ] || gh release delete-asset latest "$name" --yes
+          done

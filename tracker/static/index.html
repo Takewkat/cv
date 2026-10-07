@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Application tracker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="title-row">
+    <h1>Application tracker</h1>
+    <div class="filters">
+      <label class="search"><span class="visually-hidden">Search company or role</span>
+        <input id="search" type="search" placeholder="Search company or role" autocomplete="off"></label>
+      <div id="cv-filter" class="chips" role="group" aria-label="Filter by CV sent"></div>
+    </div>
+  </div>
+  <p class="where"><code id="data-path">loading</code> <span id="save-status" class="save-status" role="status"></span></p>
+  <p id="stats" class="stats" aria-label="Statistics"></p>
+</header>
+
+<div id="banner" class="banner" role="alert" hidden></div>
+
+<main id="board" class="board" aria-label="Board"></main>
+
+<form id="quick-add" class="quick-add" aria-label="Add an application">
+  <label>Company <input name="company" required maxlength="200" autocomplete="off" placeholder="Company, then Enter"></label>
+  <label>Role <input name="role" maxlength="200" autocomplete="off" placeholder="Optional"></label>
+  <label>CV sent <select name="cv"></select></label>
+  <button type="submit" class="primary">Add</button>
+</form>
+
+<dialog id="detail" aria-labelledby="detail-title">
+  <form id="detail-form">
+    <h2 id="detail-title">Application</h2>
+    <div class="grid">
+      <label>Company <input name="company" required maxlength="200"></label>
+      <label>Role <input name="role" maxlength="200"></label>
+      <label>CV sent <select name="cv" aria-describedby="cv-errors"></select></label>
+      <label id="cv-note-field">Which CV / role type <input name="cvNote" maxlength="200" placeholder="e.g. hand-tuned for data roles"></label>
+    </div>
+    <p id="cv-errors" class="note"></p>
+    <section class="comments" aria-labelledby="comments-title">
+      <h3 id="comments-title">Comments<span id="comments-count"></span></h3>
+      <label class="visually-hidden" for="new-comment">New comment</label>
+      <textarea id="new-comment" name="newComment" rows="3" maxlength="5000" placeholder="Impressions, what was said, what comes next"></textarea>
+      <div><button type="button" id="add-comment">Add comment</button></div>
+      <ol id="comments-list" class="comment-list"></ol>
+    </section>
+    <details class="more">
+      <summary>More</summary>
+      <div class="grid">
+        <label>Job link <input name="url" type="url" maxlength="2000" placeholder="https://"></label>
+        <label>Next step date <input name="nextDate" type="date"></label>
+        <label id="outcome-field">Outcome <select name="closedReason"></select></label>
+        <label class="check"><input type="checkbox" name="inbound"> Recruiter reached out</label>
+      </div>
+      <label>Posting text <textarea name="posting" rows="5" maxlength="100000" placeholder="Paste the job posting to compare it with the CV sent"></textarea></label>
+      <div class="gap">
+        <button type="button" id="gap-check">Check gap</button>
+        <span id="gap-status" role="status"></span>
+        <pre id="gap-output" tabindex="0" aria-label="Gap check output" hidden></pre>
+      </div>
+      <div id="history" class="history"></div>
+    </details>
+    <div class="dialog-actions">
+      <button type="button" id="delete-card" class="danger">Delete</button>
+      <span class="spacer"></span>
+      <button type="button" id="detail-cancel">Cancel</button>
+      <button type="submit" class="primary">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="outcome-dialog" aria-labelledby="outcome-title">
+  <form method="dialog">
+    <h2 id="outcome-title">Outcome for <span id="outcome-company"></span></h2>
+    <div id="outcomes" class="outcomes"></div>
+    <div class="dialog-actions">
+      <span class="spacer"></span>
+      <button type="submit" value="">Cancel</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>

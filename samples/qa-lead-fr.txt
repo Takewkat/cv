@@ -1,0 +1,30 @@
+Synthetic sample: invented job posting, not a real offer.
+QA Lead / SDET (H/F) - CDI - Lyon, télétravail partiel
+
+Fintech B2B de 80 personnes, nous construisons une plateforme de paiement utilisée par 2 000 entreprises. Nous cherchons un(e) QA Lead hands-on pour structurer la qualité au sein de 4 squads.
+
+Vos missions
+- Définir la stratégie de test et le plan de test de chaque release.
+- Développer et maintenir les tests automatisés end-to-end avec Playwright (TypeScript).
+- Mettre en place les tests d'API (REST, GraphQL) avec Postman et pytest.
+- Piloter les tests de performance avec k6 ou JMeter.
+- Intégrer les tests dans l'intégration continue (GitLab CI, Docker).
+- Suivre les KPI qualité et animer les rituels Agile / Scrum avec les PO.
+- Rédiger les scénarios BDD en Gherkin avec les équipes produit.
+- Encadrer et mentorer 2 QA engineers.
+
+Profil recherché
+- 5 ans d'expérience en automatisation des tests, dont 1 an en tant que lead.
+- Maîtrise de Playwright ou Cypress indispensable.
+- Solide expérience en tests de non-régression et en tests d'API.
+- Connaissance de Jira et Xray (ou TestRail).
+- Anglais courant requis.
+
+Nice to have
+- Tests mobiles avec Appium.
+- Connaissance de la norme PCI DSS ou du secteur bancaire.
+- Expérience de tests de sécurité (OWASP).
+- Notions de SQL et de Datadog appréciées.
+
+Avantages
+Carte Swile, mutuelle prise en charge à 100 %, 2 jours de télétravail par semaine.

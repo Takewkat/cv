@@ -1,0 +1,31 @@
+Synthetic sample: invented job posting, not a real offer.
+SRE / Ingénieur Fiabilité (H/F) - CDI - Paris
+
+Chez Nuvola, scale-up SaaS de 120 personnes, l'équipe Platform fait tourner une infrastructure multi-cloud sur AWS et Google Cloud pour plusieurs millions d'utilisateurs.
+
+Vos missions
+- Garantir la disponibilité et la performance de la production : SLO, SLI, error budgets.
+- Faire évoluer notre infrastructure as code avec Terraform et Ansible.
+- Opérer nos clusters k8s (EKS et GKE) avec Helm et ArgoCD.
+- Améliorer l'observabilité de la plateforme : Prometheus, Grafana, Loki et OpenTelemetry.
+- Participer à l'astreinte et à la gestion des incidents, rédiger les post-mortems.
+- Automatiser la CI/CD sur GitLab CI et outiller les équipes de développement.
+- Contribuer au capacity planning et à l'optimisation des coûts (FinOps).
+- Mettre en place le monitoring et les alertes avec PagerDuty.
+
+Profil recherché
+- 3 ans d'expérience minimum sur un poste SRE ou DevOps.
+- Maîtrise de Kubernetes et de Terraform indispensable.
+- Bonne connaissance de Linux et du réseau (DNS, TCP/IP, load balancing).
+- Scripting en Python, Bash ou Go requis.
+- Expérience de la haute disponibilité et du disaster recovery.
+- Anglais professionnel.
+
+Le petit plus :
+- Une expérience avec Istio ou un service mesh.
+- Des connaissances en sécurité cloud (IAM, Vault) seraient appréciées.
+- Kafka et PostgreSQL en production, un plus.
+- Des tests de charge avec k6 ou Gatling.
+
+Pourquoi nous rejoindre
+Télétravail 3 jours par semaine, RTT, équipe bienveillante, budget formation et une vraie culture de l'observabilité.

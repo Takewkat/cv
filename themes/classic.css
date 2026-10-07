@@ -1,0 +1,20 @@
+/* Classic: navy header, light grey side column, navy and slate pills. */
+:root {
+  --ink: #1e1e1e;
+  --link: #1f3a68;
+  --header-bg: #1f2d48;
+  --header-ink: #fff;
+  --side-bg: #e9edf2;
+  --side-ink: #1e1e1e;
+  --pill-bg: #1f2d48;
+  --pill-ink: #fff;
+  --accent-bg: #5a6b84;
+  --accent-ink: #fff;
+  --photo-ring: #fff;
+  --initials-bg: #5a6b84;
+  --initials-ink: #fff;
+}
+
+/* Square corners, no wave under the photo. */
+.header-bg, .side-bg { border-radius: 0; }
+.header-wave { display: none; }

@@ -1,0 +1,16 @@
+/* Sunny: yellow header, teal side column, green pills. */
+:root {
+  --ink: #1e1e1e;
+  --link: #0d42ff;
+  --header-bg: #fdb945;
+  --header-ink: #1e1e1e;
+  --side-bg: #52c5ae;
+  --side-ink: #fff;
+  --pill-bg: #1f6b5a;
+  --pill-ink: #fff;
+  --accent-bg: #fdb945;
+  --accent-ink: #1e1e1e;
+  --photo-ring: #fff;
+  --initials-bg: #1f6b5a;
+  --initials-ink: #fff;
+}

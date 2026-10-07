@@ -1,0 +1,40 @@
+ALEX MARTIN
+Backend Engineer
+Python · APIs · PostgreSQL · Cloud
+alex.martin@example.com · Lyon
+alex-martin.example.com
+PROFILE
+Backend engineer who builds and
+runs Python services: REST APIs,
+data pipelines and the CI that ships
+them. I like small, well-tested
+changes and clear on-call
+runbooks. Open to backend and
+platform roles in Lyon or remote.
+EXPERIENCE
+Jan 2023 – present · Backend Engineer · Example Logistics, Lyon
+Split a monolith into four FastAPI services; deploys went from weekly to
+daily.
+Cut the p95 latency of the tracking API from 800 ms to 150 ms with
+query and cache work.
+Moved the infrastructure to Terraform on AWS, reviewed by the whole
+team.
+Wrote the on-call runbooks and led the post-mortems for the service.
+Sep 2020 – Dec 2022 · Software Engineer · Sample Retail
+Built the order export pipeline on Celery and PostgreSQL.
+Added contract tests between the shop and the payment service.
+2019 – 2020 · Junior Developer · Demo Agency
+Django sites and REST APIs for small business clients.
+EDUCATION
+MSc Computer Science · Example University · 2017 – 2019
+SKILLS
+Code: Python, Go, SQL, Bash
+Frameworks: FastAPI, Django, Celery
+Data: PostgreSQL, Redis, Kafka
+Cloud: AWS (ECS, RDS, S3),
+Terraform
+Delivery: Docker, GitHub Actions,
+code review
+Quality: pytest, contract testing,
+observability
+Languages: English, French
