@@ -12,12 +12,13 @@ A **CV generator** (one-page A4 PDFs, checked for ATS robots) and a private **jo
 
 ```
 cp -R profiles/_template profiles/<you>   # edit profiles/<you>/content.js and facts.md
-                                          #    a variant may add projects: personal projects and tech watch, shown under the experience
 ./build.sh <you>                          # -> out/<you>/*.pdf
 ./tracker.sh                              # -> http://127.0.0.1:8765/
 ./new-application.sh "Company" "Role" main  # -> applications/<date>-<company>-<role>/ (posting from clipboard, motivation draft, gap check)
 ./application-cv.sh applications/<dir>    # -> one-off CV for that application, from a variant X added to content.js then removed
 ```
+
+A variant holds the name, headline, tagline, profile, skills, experience, education and contact, plus two optional blocks: `projects`, personal projects and tech watch under the experience, and `interests`, one line at the bottom of the side column. Readers weigh both: they show what you do beyond the job. Themes: `classic` (navy, square), `nord` (the Nord palette, square), `sunny` (yellow and teal, rounded).
 
 With Claude Code or Cursor, give the agent a job posting: `AGENTS.md` and `.claude/skills/new-application/` make it run the whole application, from company research to the tailored CV and the motivation.
 

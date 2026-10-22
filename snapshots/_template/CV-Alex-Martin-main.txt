@@ -25,6 +25,9 @@ Built the order export pipeline on Celery and PostgreSQL.
 Added contract tests between the shop and the payment service.
 2019 – 2020 · Junior Developer · Demo Agency
 Django sites and REST APIs for small business clients.
+PROJECTS
+2025 – present · Home lab · github.com/alex-martin/homelab
+A Kubernetes cluster under Ansible and Terraform; CKA in preparation.
 EDUCATION
 MSc Computer Science · Example University · 2017 – 2019
 SKILLS
@@ -37,4 +40,6 @@ Delivery: Docker, GitHub Actions,
 code review
 Quality: pytest, contract testing,
 observability
-Languages: English, French
+Languages: English, French
+INTERESTS
+Piano, mountain hiking, chess.

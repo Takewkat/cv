@@ -4,7 +4,7 @@
 // must come out intact in the PDF text, so write them the way job ads write them.
 
 window.PROFILE = {
-  theme: "classic",            // a file in themes/, without .css
+  theme: "classic",            // a file in themes/, without .css: classic, nord or sunny
   fileStem: "CV-Alex-Martin",  // PDF name: out/<id>/<fileStem>-<variant>.pdf
   lang: "en",                  // <html lang>, stored as the PDF language
   photo: null,                 // "photo.png" next to this file, or null for an initials circle
@@ -42,13 +42,14 @@ window.PROFILE = {
         { dates: "2019 \u2013 2020", title: "Junior Developer", org: "Demo Agency",
           text: "Django sites and REST APIs for small business clients." }
       ],
-      // Optional. Personal projects and tech watch, same shape as a job, shown under the experience.
-      // projects: [
-      //   { dates: "2025 \u2013 present", title: "Home lab", org: "github.com/<you>/homelab",
-      //     text: "A Kubernetes cluster under Ansible and Terraform; CKA in preparation." }
-      // ],
+      // Optional. Personal projects and tech watch, same shape as a job, shown under the experience:
+      // readers weigh them, they show what you do beyond the job.
+      projects: [
+        { dates: "2025 \u2013 present", title: "Home lab", org: "github.com/alex-martin/homelab",
+          text: "A Kubernetes cluster under Ansible and Terraform; CKA in preparation." }
+      ],
       // Optional. One line at the bottom of the side column.
-      // interests: "Piano, mountain hiking, chess.",
+      interests: "Piano, mountain hiking, chess.",
       education: [
         { title: "MSc Computer Science", org: "Example University", dates: "2017 \u2013 2019" }
       ],
