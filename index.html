@@ -20,10 +20,9 @@
   .page { position: relative; width: 210mm; height: 297mm; margin: 10mm auto; background: #fff; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.15); }
 
   /* Decorative shapes */
-  .side-bg { position: absolute; left: 0; top: 30mm; width: var(--side); bottom: 26mm; background: var(--side-bg); border-radius: 0 0 22mm 0; }
+  .side-bg { position: absolute; left: 0; top: 30mm; width: var(--side); bottom: 0; background: var(--side-bg); }
   .header-bg { position: absolute; left: 0; top: 0; right: 0; height: 47mm; background: var(--header-bg); border-radius: 0 0 26mm 0; }
   .header-wave { position: absolute; left: 0; top: 40mm; width: 72mm; height: 16mm; background: var(--header-bg); border-radius: 0 0 50% 0; }
-  .bottom-band { position: absolute; left: var(--side); right: 0; bottom: 0; height: 9mm; background: var(--side-bg); }
 
   .photo { position: absolute; left: 9mm; top: 6mm; width: 50mm; height: 50mm; border-radius: 50%; overflow: hidden; border: 2.2mm solid var(--photo-ring); background: var(--photo-ring); }
   .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 48%; transform: scale(1.16); }
@@ -45,12 +44,14 @@
   /* The pill classes set display, so the hidden attribute needs the override to keep an empty block out of the PDF text. */
   [hidden] { display: none !important; }
 
-  /* Columns: grid places the blocks, DOM order is the text order (profile, experience, skills) */
-  .cols { position: absolute; left: 6mm; right: 8mm; top: 62mm; bottom: 12mm; display: grid; grid-template-columns: calc(var(--side) - 11mm) 1fr; grid-template-rows: auto minmax(0, 1fr); column-gap: 9mm; }
+  /* Columns: grid places the blocks, DOM order is the text order (profile, experience, skills, interests) */
+  .cols { position: absolute; left: 6mm; right: 8mm; top: 62mm; bottom: 12mm; display: grid; grid-template-columns: calc(var(--side) - 11mm) 1fr; grid-template-rows: auto minmax(0, 1fr) auto; column-gap: 9mm; }
 
   /* Left column */
   .side { grid-column: 1; grid-row: 1; min-height: 0; color: var(--side-ink); }
-  .side-skills { grid-row: 2; margin-bottom: 18mm; }
+  .side-skills { grid-row: 2; margin-bottom: 4mm; }
+  .side-extra { grid-row: 3; margin-bottom: 4mm; }
+  .side-extra .profile { margin-bottom: 0; }
   .side .pill { display: block; text-align: center; margin: 0 4mm 3.5mm; }
   .side .profile { font-size: 10pt; font-weight: 500; line-height: 1.45; margin-bottom: 6mm; }
   .side .skills p { font-size: 9.6pt; font-weight: 500; line-height: 1.35; margin-bottom: 1.8mm; }
@@ -58,7 +59,7 @@
 
 
   /* Right column */
-  .main { grid-column: 2; grid-row: 1 / 3; min-height: 0; display: flex; flex-direction: column; }
+  .main { grid-column: 2; grid-row: 1 / 4; min-height: 0; display: flex; flex-direction: column; }
   .main .pill { align-self: flex-start; margin-bottom: 3mm; }
   .job { margin-bottom: 3.4mm; font-size: 10pt; line-height: 1.42; }
   .job .hd { font-weight: 700; }
@@ -78,7 +79,6 @@
   <div class="side-bg"></div>
   <div class="header-bg"></div>
   <div class="header-wave"></div>
-  <div class="bottom-band"></div>
   <div class="photo" id="photo"></div>
   <div class="head"><h1 id="name"></h1><h2 id="headline"></h2><div class="tagline" id="tagline"></div></div>
   <div class="links" id="links"></div>
@@ -98,6 +98,10 @@
     <aside class="side side-skills">
       <span class="pill">SKILLS</span>
       <div class="skills" id="skills"></div>
+    </aside>
+    <aside class="side side-extra" id="interests-block" hidden>
+      <span class="pill">INTERESTS</span>
+      <p class="profile" id="interests"></p>
     </aside>
   </div>
 </div>
@@ -155,6 +159,9 @@
     document.getElementById("profile").textContent = cv.profile;
     document.getElementById("skills").innerHTML =
       cv.skills.map(([k, v]) => `<p><b>${esc(k)}:</b> ${esc(v)}</p>`).join("");
+    const interests = cv.interests;
+    document.getElementById("interests-block").hidden = !interests;
+    document.getElementById("interests").textContent = Array.isArray(interests) ? interests.join(DOT) : (interests || "");
     // One block for a job and for a project: dates, title and org on one line, then bullets or a text.
     const block = (j) => {
       const hd = `<div class="hd">${[j.dates, j.title, j.org].filter(Boolean).map(esc).join(DOT)}</div>`;

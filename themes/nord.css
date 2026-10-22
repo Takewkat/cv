@@ -1,0 +1,20 @@
+/* Nord: the Nord palette (nordtheme.com), slate header, snow side column, frost pills. Square corners. */
+:root {
+  --ink: #2e3440;          /* nord0 */
+  --link: #5e81ac;         /* nord10 */
+  --header-bg: #3b4252;    /* nord1 */
+  --header-ink: #eceff4;   /* nord6 */
+  --side-bg: #e5e9f0;      /* nord5 */
+  --side-ink: #2e3440;     /* nord0 */
+  --pill-bg: #5e81ac;      /* nord10 */
+  --pill-ink: #eceff4;     /* nord6 */
+  --accent-bg: #88c0d0;    /* nord8 */
+  --accent-ink: #2e3440;   /* nord0 */
+  --photo-ring: #eceff4;   /* nord6 */
+  --initials-bg: #5e81ac;  /* nord10 */
+  --initials-ink: #eceff4; /* nord6 */
+}
+
+/* Square corners, no wave under the photo. */
+.header-bg, .side-bg { border-radius: 0; }
+.header-wave { display: none; }

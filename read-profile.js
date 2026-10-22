@@ -6,7 +6,8 @@ const fs = require("fs"), path = require("path"), vm = require("vm");
 const ROOT = __dirname;
 const SAFE = /^[A-Za-z0-9._-]+$/;
 const VARIANT_KEYS = ["name", "headline", "tagline", "profile", "skills", "experience", "education", "contact"];
-// Optional: projects, a list of { dates, title, org, text | items } rendered under the experience.
+// Optional: projects, a list of { dates, title, org, text | items } rendered under the experience;
+// interests, a text or a list of texts, rendered at the bottom of the side column.
 const LABEL_MAX = 40;
 
 function fail(msg) {
@@ -52,6 +53,10 @@ function errors(id, p) {
     const projects = p.variants[v].projects;
     if (projects != null && (!Array.isArray(projects) || projects.some((x) => !x || typeof x !== "object" || !x.title || !(x.text || x.items)))) {
       out.push(`variant ${v} projects must be a list of { dates, title, org, text | items }`);
+    }
+    const interests = p.variants[v].interests;
+    if (interests != null && !(typeof interests === "string" || (Array.isArray(interests) && interests.every((x) => typeof x === "string")))) {
+      out.push(`variant ${v} interests must be a text or a list of texts`);
     }
   }
   return out;

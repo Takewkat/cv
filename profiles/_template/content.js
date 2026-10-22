@@ -47,6 +47,8 @@ window.PROFILE = {
       //   { dates: "2025 \u2013 present", title: "Home lab", org: "github.com/<you>/homelab",
       //     text: "A Kubernetes cluster under Ansible and Terraform; CKA in preparation." }
       // ],
+      // Optional. One line at the bottom of the side column.
+      // interests: "Piano, mountain hiking, chess.",
       education: [
         { title: "MSc Computer Science", org: "Example University", dates: "2017 \u2013 2019" }
       ],
