@@ -12,6 +12,7 @@ A **CV generator** (one-page A4 PDFs, checked for ATS robots) and a private **jo
 
 ```
 cp -R profiles/_template profiles/<you>   # edit profiles/<you>/content.js and facts.md
+                                          #    a variant may add projects: personal projects and tech watch, shown under the experience
 ./build.sh <you>                          # -> out/<you>/*.pdf
 ./tracker.sh                              # -> http://127.0.0.1:8765/
 ./new-application.sh "Company" "Role" main  # -> applications/<date>-<company>-<role>/ (posting from clipboard, motivation draft, gap check)

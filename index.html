@@ -42,6 +42,9 @@
   .pill { background: var(--pill-bg); color: var(--pill-ink); }
   .pill.accent { background: var(--accent-bg); color: var(--accent-ink); }
 
+  /* The pill classes set display, so the hidden attribute needs the override to keep an empty block out of the PDF text. */
+  [hidden] { display: none !important; }
+
   /* Columns: grid places the blocks, DOM order is the text order (profile, experience, skills) */
   .cols { position: absolute; left: 6mm; right: 8mm; top: 62mm; bottom: 12mm; display: grid; grid-template-columns: calc(var(--side) - 11mm) 1fr; grid-template-rows: auto minmax(0, 1fr); column-gap: 9mm; }
 
@@ -87,6 +90,8 @@
     <main class="main" id="main">
       <span class="pill accent">EXPERIENCE</span>
       <div id="experience"></div>
+      <span class="pill" id="projects-pill">PROJECTS</span>
+      <div id="projects"></div>
       <span class="pill">EDUCATION</span>
       <div class="edu" id="education"></div>
     </main>
@@ -150,13 +155,18 @@
     document.getElementById("profile").textContent = cv.profile;
     document.getElementById("skills").innerHTML =
       cv.skills.map(([k, v]) => `<p><b>${esc(k)}:</b> ${esc(v)}</p>`).join("");
-    document.getElementById("experience").innerHTML = cv.experience.map((j) => {
-      const hd = `<div class="hd">${esc(j.dates)}${DOT}${esc(j.title)}${DOT}${esc(j.org)}</div>`;
+    // One block for a job and for a project: dates, title and org on one line, then bullets or a text.
+    const block = (j) => {
+      const hd = `<div class="hd">${[j.dates, j.title, j.org].filter(Boolean).map(esc).join(DOT)}</div>`;
       const body = j.items ? `<ul>${j.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>` : `<div>${esc(j.text)}</div>`;
       return `<div class="job">${hd}${body}</div>`;
-    }).join("");
+    };
+    document.getElementById("experience").innerHTML = cv.experience.map(block).join("");
+    const projects = cv.projects || [];
+    document.getElementById("projects-pill").hidden = !projects.length;
+    document.getElementById("projects").innerHTML = projects.map(block).join("");
     document.getElementById("education").innerHTML =
-      cv.education.map((e) => `<p><b>${esc(e.title)}</b>${DOT}${esc(e.org)}${DOT}${esc(e.dates)}</p>`).join("");
+      cv.education.map((e) => `<p><b>${esc(e.title)}</b>${[e.org, e.dates].filter(Boolean).map((x) => DOT + esc(x)).join("")}</p>`).join("");
     checkOverflow();
   }
 
@@ -193,7 +203,7 @@
     const bottom = (el) => el.getBoundingClientRect().bottom;
     if (bottom(document.querySelector(".head")) > bottom(document.querySelector(".header-bg")) + 0.5) over.push("name/headline/tagline");
     const main = document.getElementById("main");
-    if (main.scrollHeight > main.clientHeight + 1) over.push("experience/education");
+    if (main.scrollHeight > main.clientHeight + 1) over.push("experience/projects/education");
     const side = document.querySelector(".side-skills");
     if (side.scrollHeight > side.clientHeight + 1) over.push("profile/skills");
     if (over.length) {

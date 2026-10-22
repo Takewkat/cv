@@ -6,6 +6,7 @@ const fs = require("fs"), path = require("path"), vm = require("vm");
 const ROOT = __dirname;
 const SAFE = /^[A-Za-z0-9._-]+$/;
 const VARIANT_KEYS = ["name", "headline", "tagline", "profile", "skills", "experience", "education", "contact"];
+// Optional: projects, a list of { dates, title, org, text | items } rendered under the experience.
 const LABEL_MAX = 40;
 
 function fail(msg) {
@@ -47,6 +48,10 @@ function errors(id, p) {
     const label = p.variants[v].label;
     if (label != null && (typeof label !== "string" || !label.trim() || label.length > LABEL_MAX)) {
       out.push(`variant ${v} label must be a short text of 1 to ${LABEL_MAX} characters, e.g. "SRE / Platform"`);
+    }
+    const projects = p.variants[v].projects;
+    if (projects != null && (!Array.isArray(projects) || projects.some((x) => !x || typeof x !== "object" || !x.title || !(x.text || x.items)))) {
+      out.push(`variant ${v} projects must be a list of { dates, title, org, text | items }`);
     }
   }
   return out;
